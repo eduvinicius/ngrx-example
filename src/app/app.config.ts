@@ -6,11 +6,12 @@ import { provideStore } from '@ngrx/store';
 import { buscarLivroEffect } from '../livros/state/livro.effects';
 import { routes } from './app.routes';
 import { appReducers } from './state/app.reducers';
+import { buscarFilmeEffect } from '../filmes/state/filmes.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideStore(appReducers),
-    provideEffects({ buscarLivroEffect })
+    provideEffects({ buscarLivroEffect, buscarFilmeEffect })
 ]
 };

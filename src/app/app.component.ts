@@ -6,6 +6,9 @@ import { Store } from '@ngrx/store';
 import { LivroService } from '../livros/livro.service';
 import { livroActions } from '../livros/state/livro.actions';
 import { livrosSelector } from '../livros/state/livro.selectors';
+import { filmesSelector } from '../filmes/state/filme.selector';
+import { filmeActions } from '../filmes/state/filme.actions';
+import { generateRandomId } from './utils/generateRandomId';
 
 @Component({
   selector: 'app-root',
@@ -16,15 +19,18 @@ import { livrosSelector } from '../livros/state/livro.selectors';
 })
 export class AppComponent implements OnInit {
   title = 'angular-ngrx-aula';
-  
+
   livroService = inject(LivroService);
   store = inject(Store);
 
   livros$ = this.store.select(livrosSelector);
   livroInput = '';
-  
+  filmes$ = this.store.select(filmesSelector);
+  filmesInput = '';
+
   ngOnInit(): void {
     this.store.dispatch(livroActions.carregarLivros());
+    this.store.dispatch(filmeActions.carregarFilmes());
   }
 
   adicionar(){
@@ -32,6 +38,15 @@ export class AppComponent implements OnInit {
       {
         id: 10,
         nome: this.livroInput
+      }
+    ))
+  }
+
+  adicionarFilme() {
+    this.store.dispatch(filmeActions.adicionarFilmes(
+      {
+        id: generateRandomId(),
+        nome: this.filmesInput
       }
     ))
   }

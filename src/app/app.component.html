@@ -6,3 +6,12 @@
   <input type="text" [(ngModel)]="livroInput">
   <button (click)="adicionar()"> Adicionar </button>
 </div>
+
+@for (filme of filmes$ | async; track $index) {
+  <p> {{ filme.nome }} </p>
+}
+
+<div>
+  <input type="text" [(ngModel)]="filmesInput">
+  <button (click)="adicionarFilme()"> Adicionar </button>
+</div>
